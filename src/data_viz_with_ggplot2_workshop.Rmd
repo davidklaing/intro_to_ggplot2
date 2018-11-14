@@ -1,0 +1,124 @@
+---
+title: "Data visualization with ggplot2"
+output: github_document
+---
+
+## How to get set up for this workshop
+
+### Our virtual space:
+
+[http://backchannelchat.com/chat/parmw](http://backchannelchat.com/chat/parmw)
+
+### Getting this document on your computer:
+
+1. Go to the GitHub repository here: [https://github.com/davidklaing/intro_to_ggplot2](https://github.com/davidklaing/intro_to_ggplot2)
+2. Click the green button on the right that says "Clone or download".
+3. Click "Download ZIP". (If you're proficient with git, feel free to fork the repository.)
+4. Create a folder on your computer to store your work, and store your ZIP file there.
+5. Double-click your ZIP file to unzip it and get all the code.
+
+### Getting R and Rstudio
+
+1. Download and install R from here: [http://cran.stat.sfu.ca/](http://cran.stat.sfu.ca/).
+2. Download and install RStudio Desktop (Open Source Edition) from here: [https://www.rstudio.com/products/rstudio/#Desktop](https://www.rstudio.com/products/rstudio/#Desktop).
+
+### Getting ready to play!
+
+1. In RStudio, open `data_viz_with_ggplot2_workshop.Rmd`, a file in `YOUR_FOLDER/intro_to_ggplot2/`. (That's this file!)
+2. In the code snippet below, remove the hashtags from both lines, and click the green "play" button on the right to install `dplyr`, `ggplot2`, and `titanic`, the three packages you'll need for the workshop. Once the installation is done, you can either delete those lines or comment them out (add hashtags).
+
+```{r}
+#install.packages("dplyr")
+#install.packages("ggplot2")
+#install.packages("gapminder")
+```
+
+### Having installation problems?
+
+Option 1: Ask for help!
+
+Option 2a: Use Rstudio Cloud
+
+## Ready to rock
+
+### What is data visualization, and why would you want to learn how to do it?
+
+
+
+### Rmarkdown in Rstudio: where the heck are we?
+
+* RStudio is an Interactive Development Environment (or IDE) — a desktop application for writing code.
+* Rmarkdown, the file format we're working in, allows us to write and execute code snippets, while also writing [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), a plain text format that allows for simple rendering of headings, bold, italics, hyperlinks, etc.
+* Analogy: Rstudio is to Rmarkdown as Microsoft Word is to .docx.
+
+Quick tip for writing and executing code in RStudio: to execute a line of code, move your cursor to that line and then type `Ctrl+Enter`. For example:
+
+```{r}
+# Move your cursor to the line below, and type Ctrl-Enter.
+print("hello woRld!")
+```
+
+First we'll load our packages, using the `library()` function:
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(gapminder)
+```
+
+The `titanic` package has data about all the passengers of the Titanic. The two main datasets you can inspect are called `titanic_train` and `titanic_test` — the difference doesn't matter for now. Let's take a look at the first six rows of `titanic_train`, using the `head()` function:
+
+```{r}
+head(gapminder)
+```
+
+What if we want to see some documentation on this dataset, perhaps to learn more about what the column names mean?
+
+```{r}
+# To see documentation about any object or function in R, prepend it with a 
+# question mark and execute that line.
+?gapminder
+```
+
+### Let's use data visualization to answer a question about our dataset!
+
+Learning goals:
+
+- Define the following aesthetic mappings:
+  - x
+  - y
+  - color
+  - alpha
+  - fill
+- Define the following geometric objects:
+  - point
+  - bar
+  - histogram
+  - line
+- Control the title and axis labels
+- Choose an appropriate geometric object
+
+## Plotting with `ggplot()`
+
+The `ggplot2` package is the best way to create visualizations in R. The code for each visualization comes in two main pieces:
+
+1. Mapping of variables onto aesthetics (the visual properties of the graph).
+2. Selection of a "geom" ("geometric object"), like a bar, a point, or a line, which will appear in the visualization as a representation of each observation.
+
+```{r}
+gapminder_2007 <- gapminder %>% dplyr::filter(year == 2007)
+
+gapminder_2007
+
+ggplot(
+  data = gapminder_2007,
+  mapping = aes(x = gdpPercap, y = lifeExp)
+) +
+  geom_point()
+```
+
+
+
+```{r}
+sessionInfo()
+```
