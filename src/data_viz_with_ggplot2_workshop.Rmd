@@ -80,6 +80,86 @@ What if we want to see some documentation on this dataset, perhaps to learn more
 head(gapminder)
 ```
 
+## Let's start with a question:
+
+* How has the population of India grown over the entire time period for which we have data?
+
+### Removing irrelevant data
+
+The `tidyverse` way (recommended!):
+
+```{r}
+india_only <- gapminder %>% filter(country == "India")
+```
+
+The base R way:
+
+```{r}
+india_only <- gapminder[gapminder$country == "India", ]
+```
+
+### Setting up the base layer with `ggplot()` and `aes()`
+
+```{r}
+ggplot(
+  data = india_only, # Define the data that will be used to build the visualization
+  mapping = aes(x = year, y = pop) # Map variables to aesthetic properties
+)
+```
+
+#### Exercise:
+
+Using the `india_only` data, set up a different base layer with `year` on the x axis and `gdpPercap` on the y axis.
+
+```{r}
+ggplot(
+  data = india_only,
+  # YOUR CODE HERE
+)
+```
+
+### Choose a `geom` — a geometric object that will represent each data point (each row in your dataframe).
+
+```{r}
+ggplot(
+  data = india_only,
+  mapping = aes(x = year, y = pop)
+) +
+  geom_point()
+```
+
+#### Exercise:
+
+Try out a different geom, from the options below:
+
+- `geom_col()`
+- `geom_line()`
+- `geom_histogram()`
+
+```{r}
+
+```
+
+### Add a second geom layer
+
+```{r}
+ggplot(
+  data = india_only,
+  mapping = aes(x = year, y = pop)
+) +
+  geom_point(color = "blue") +
+  geom_line(color = "red")
+```
+
+#### Exercise:
+
+Try reversing the order in which the layers are added. How does the plot change?
+
+```{r}
+
+```
+
+
 ## Appendix
 
 Plot for comparing data visualization options:
