@@ -7,7 +7,7 @@ output: github_document
 
 ### Our virtual space:
 
-[http://backchannelchat.com/chat/parmw](http://backchannelchat.com/chat/parmw)
+[http://backchannelchat.com/chat/1ynme](http://backchannelchat.com/chat/1ynme)
 
 ### Getting this document on your computer:
 
@@ -33,18 +33,6 @@ output: github_document
 #install.packages("gapminder")
 ```
 
-### Having installation problems?
-
-Option 1: Ask for help!
-
-Option 2a: Use Rstudio Cloud
-
-## Ready to rock
-
-### What is data visualization, and why would you want to learn how to do it?
-
-
-
 ### Rmarkdown in Rstudio: where the heck are we?
 
 * RStudio is an Interactive Development Environment (or IDE) — a desktop application for writing code.
@@ -66,7 +54,7 @@ library(ggplot2)
 library(gapminder)
 ```
 
-The `titanic` package has data about all the passengers of the Titanic. The two main datasets you can inspect are called `titanic_train` and `titanic_test` — the difference doesn't matter for now. Let's take a look at the first six rows of `titanic_train`, using the `head()` function:
+The `titanic` package has data about all the passengers of the Titanic. The two main datasets you can inspect are called `titanic_train` and `titanic_test` — the difference doesn't matter for now. Let's take a look at the first six rows of `gapminder`, using the `head()` function:
 
 ```{r}
 head(gapminder)
@@ -80,44 +68,44 @@ What if we want to see some documentation on this dataset, perhaps to learn more
 ?gapminder
 ```
 
-### Let's use data visualization to answer a question about our dataset!
-
-Learning goals:
-
-- Define the following aesthetic mappings:
-  - x
-  - y
-  - color
-  - alpha
-  - fill
-- Define the following geometric objects:
-  - point
-  - bar
-  - histogram
-  - line
-- Control the title and axis labels
-- Choose an appropriate geometric object
-
 ## Plotting with `ggplot()`
 
-The `ggplot2` package is the best way to create visualizations in R. The code for each visualization comes in two main pieces:
+### Learning goals
 
-1. Mapping of variables onto aesthetics (the visual properties of the graph).
-2. Selection of a "geom" ("geometric object"), like a bar, a point, or a line, which will appear in the visualization as a representation of each observation.
+1. Install and load the `ggplot2` package
+2. Inspect a dataframe to see our data in spreadsheet form
+3. Pass our dataframe into the `ggplot()` function, which builds the base layer for our visualization
+4. Map our variables of interest onto the aesthetic properties of the graph, by using the `aes()` function in the `mapping` argument.
+5. Define the geometric objects that we want to represent our data points (the rows in our dataframe)
+6. Add a title, axis labels, and other goodies
+7. Save a plot to PNG, for easy sharing
+
+
+
+
+## Appendix
+
+Plot for comparing data visualization options:
 
 ```{r}
-gapminder_2007 <- gapminder %>% dplyr::filter(year == 2007)
-
-gapminder_2007
-
-ggplot(
-  data = gapminder_2007,
-  mapping = aes(x = gdpPercap, y = lifeExp)
-) +
-  geom_point()
+viz_options <- tibble::tibble(
+  option = c("ggplot2", "D3", "matplotlib", "Tableau"),
+  simplicity = c(7, 1, 5, 10),
+  flexibility = c(7, 10, 7, 4)
+)
+viz_options %>% 
+  ggplot() +
+  geom_point(aes(x = simplicity, y = flexibility)) +
+  geom_text_repel(aes(x = simplicity, y = flexibility, label = option)) +
+  scale_x_continuous(limits = c(0, 10), breaks = 0:10) +
+  scale_y_continuous(limits = c(0, 10), breaks = 0:10) +
+  labs(
+    title = "My extremely subjective ratings of popular data viz tools",
+    x = "How easy it is to learn",
+    y = "How much you can do with it"
+  ) +
+  theme_light()
 ```
-
-
 
 ```{r}
 sessionInfo()
