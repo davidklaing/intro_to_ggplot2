@@ -1,7 +1,10 @@
 ---
-title: "Data visualization with ggplot2"
+title: "Learn how to visualize your data with ggplot2"
 output: github_document
 ---
+
+Instructor: David Laing
+GitHub/Twitter/LinkedIn: @davidklaing
 
 ## Our virtual chatroom, for sharing code, asking questions, etc:
 
@@ -11,7 +14,7 @@ output: github_document
 
 1. Go to this link: [https://rstudio.cloud/project/137478](https://rstudio.cloud/project/137478)
 2. Create an RStudio Cloud account, if you don't already have one.
-3. Install
+3. Scroll down to "Installing necessary packages"
 
 ## How to get set up for this workshop on your local machine
 
@@ -28,7 +31,7 @@ output: github_document
 1. Download and install R from here: [http://cran.stat.sfu.ca/](http://cran.stat.sfu.ca/).
 2. Download and install RStudio Desktop (Open Source Edition) from here: [https://www.rstudio.com/products/rstudio/#Desktop](https://www.rstudio.com/products/rstudio/#Desktop).
 
-## Getting ready to play!
+## Installing necessary packages
 
 1. In RStudio, open `data_viz_with_ggplot2_workshop.Rmd`, a file in `YOUR_FOLDER/intro_to_ggplot2/`. (That's this file!)
 2. In the code snippet below, remove the hashtags from both lines, and click the green "play" button on the right to install `dplyr`, `ggplot2`, and `gapminder`, `ggrepel`, and `scales`, the five packages you'll need for the workshop. Once the installation is done, you can either delete those lines or comment them out (add hashtags).
