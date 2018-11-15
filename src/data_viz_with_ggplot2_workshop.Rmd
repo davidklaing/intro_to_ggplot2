@@ -3,11 +3,17 @@ title: "Data visualization with ggplot2"
 output: github_document
 ---
 
-## How to get set up for this workshop
-
-### Our virtual space:
+## Our virtual chatroom, for sharing code, asking questions, etc:
 
 [http://backchannelchat.com/chat/1ynme](http://backchannelchat.com/chat/1ynme)
+
+## How to get set up for this workshop on RStudio Cloud:
+
+1. Go to this link: [https://rstudio.cloud/project/137478](https://rstudio.cloud/project/137478)
+2. Create an RStudio Cloud account, if you don't already have one.
+3. Install
+
+## How to get set up for this workshop on your local machine
 
 ### Getting this document on your computer:
 
@@ -22,19 +28,20 @@ output: github_document
 1. Download and install R from here: [http://cran.stat.sfu.ca/](http://cran.stat.sfu.ca/).
 2. Download and install RStudio Desktop (Open Source Edition) from here: [https://www.rstudio.com/products/rstudio/#Desktop](https://www.rstudio.com/products/rstudio/#Desktop).
 
-### Getting ready to play!
+## Getting ready to play!
 
 1. In RStudio, open `data_viz_with_ggplot2_workshop.Rmd`, a file in `YOUR_FOLDER/intro_to_ggplot2/`. (That's this file!)
-2. In the code snippet below, remove the hashtags from both lines, and click the green "play" button on the right to install `dplyr`, `ggplot2`, and `titanic`, the three packages you'll need for the workshop. Once the installation is done, you can either delete those lines or comment them out (add hashtags).
+2. In the code snippet below, remove the hashtags from both lines, and click the green "play" button on the right to install `dplyr`, `ggplot2`, and `gapminder`, `ggrepel`, and `scales`, the five packages you'll need for the workshop. Once the installation is done, you can either delete those lines or comment them out (add hashtags).
 
 ```{r}
 #install.packages("dplyr")
 #install.packages("ggplot2")
 #install.packages("gapminder")
 #install.packages("ggrepel")
+#install.packages("scales")
 ```
 
-### Rmarkdown in Rstudio: where the heck are we?
+### Rmarkdown in Rstudio: where are we?
 
 * RStudio is an Interactive Development Environment (or IDE) — a desktop application for writing code.
 * Rmarkdown, the file format we're working in, allows us to write and execute code snippets, while also writing [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), a plain text format that allows for simple rendering of headings, bold, italics, hyperlinks, etc.
@@ -54,6 +61,7 @@ library(dplyr)
 library(ggplot2)
 library(gapminder)
 library(ggrepel)
+library(scales)
 ```
 
 What if we want to see some documentation on this dataset, perhaps to learn more about what the column names mean?
@@ -84,18 +92,32 @@ head(gapminder)
 
 * How has the population of India grown over the entire time period for which we have data?
 
-### Removing irrelevant data
+### Getting just the data we want with `filter()`
 
 The `tidyverse` way (recommended!):
 
 ```{r}
-india_only <- gapminder %>% filter(country == "India")
+india_only <- filter(
+  .data = gapminder,
+  country == "India"
+)
 ```
 
 The base R way:
 
 ```{r}
 india_only <- gapminder[gapminder$country == "India", ]
+```
+
+#### Exercise
+
+Try grabbing all the data for all countries, but just from the year 1952.
+
+```{r}
+only_1952 <- filter(
+  gapminder,
+  # YOUR CODE HERE
+)
 ```
 
 ### Setting up the base layer with `ggplot()` and `aes()`
@@ -137,7 +159,11 @@ Try out a different geom, from the options below:
 - `geom_histogram()`
 
 ```{r}
-
+ggplot(
+  data = india_only,
+  mapping = aes(x = year, y = pop)
+) +
+  # YOUR CODE HERE
 ```
 
 ### Add a second geom layer
@@ -156,9 +182,40 @@ ggplot(
 Try reversing the order in which the layers are added. How does the plot change?
 
 ```{r}
-
+ggplot(india_only, aes(x = year, y = pop)) +
+  geom_point(color = "blue") +
+  geom_line(color = "red")
 ```
 
+### Add a title, and edit the axis labels.
+
+```{r}
+ggplot(india_only, aes(x = year, y = pop)) +
+  geom_line(color = "red") +
+  geom_point(color = "blue") +
+  labs(
+    title = "Population growth of India, 1952-2007",
+    x = "Year",
+    y = "Population"
+  ) +
+  scale_y_continuous(labels = comma)
+```
+
+### Save your plot to PNG
+
+`ggsave()` will by default save the most recent plot you've created, but if you want to save a specific plot, you can assign that plot to a variable and pass the name of that variable into `ggsave()`.
+
+```{r}
+ggsave(filename = "../results/india_population_growth.png")
+```
+
+### Challenge:
+
+Create a scatterplot that shows the relationship between GDP per capita and life expectancy in the year 2007. When you're done, save it to the `results` directory.
+
+```{r}
+# YOUR CODE HERE
+```
 
 ## Appendix
 
