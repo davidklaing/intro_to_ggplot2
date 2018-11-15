@@ -31,6 +31,7 @@ output: github_document
 #install.packages("dplyr")
 #install.packages("ggplot2")
 #install.packages("gapminder")
+#install.packages("ggrepel")
 ```
 
 ### Rmarkdown in Rstudio: where the heck are we?
@@ -52,6 +53,7 @@ First we'll load our packages, using the `library()` function:
 library(dplyr)
 library(ggplot2)
 library(gapminder)
+library(ggrepel)
 ```
 
 What if we want to see some documentation on this dataset, perhaps to learn more about what the column names mean?
