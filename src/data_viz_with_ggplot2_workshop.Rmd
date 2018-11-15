@@ -54,12 +54,6 @@ library(ggplot2)
 library(gapminder)
 ```
 
-The `titanic` package has data about all the passengers of the Titanic. The two main datasets you can inspect are called `titanic_train` and `titanic_test` — the difference doesn't matter for now. Let's take a look at the first six rows of `gapminder`, using the `head()` function:
-
-```{r}
-head(gapminder)
-```
-
 What if we want to see some documentation on this dataset, perhaps to learn more about what the column names mean?
 
 ```{r}
@@ -80,6 +74,9 @@ What if we want to see some documentation on this dataset, perhaps to learn more
 6. Add a title, axis labels, and other goodies
 7. Save a plot to PNG, for easy sharing
 
+```{r}
+head(gapminder)
+```
 
 ## Appendix
 
