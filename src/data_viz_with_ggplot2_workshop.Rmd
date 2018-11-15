@@ -81,8 +81,6 @@ What if we want to see some documentation on this dataset, perhaps to learn more
 7. Save a plot to PNG, for easy sharing
 
 
-
-
 ## Appendix
 
 Plot for comparing data visualization options:
